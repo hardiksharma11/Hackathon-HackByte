@@ -1,14 +1,15 @@
 const express = require("express");
+const { protect } = require("../middleware/auth.js");
 
 const {
-    getallnotes , addnote , updatenote , deletenote
+    getallposts , addpost ,  deletepost
 } = require("../controllers/posts.js");
+
 
 const router = express.Router();
 
-router.route("/getallnotes").get(getallnotes);
-router.route("/addnote").post(addnote);
-router.route("/updatenote/:id").put(updatenote);
-router.route("/deletenote/:id").delete(deletenote);
+router.route("/getallposts").get(protect,getallposts);
+router.route("/addpost").post(protect,addpost);
+router.route("/deletepost/:id").delete(protect,deletepost);
 
 module.exports = router;
